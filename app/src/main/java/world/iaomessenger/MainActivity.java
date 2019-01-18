@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+        // I changed it once more from the server
         // this line has been added from gitlab!!
         // teammate changes
         Log.d(TAG, "onCreate: Started.");
