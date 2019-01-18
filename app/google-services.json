@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "326401909357",
+    "firebase_url": "https://iaomessenger.firebaseio.com",
+    "project_id": "iaomessenger",
+    "storage_bucket": "iaomessenger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326401909357:android:2e7e2948ec42a995",
+        "android_client_info": {
+          "package_name": "world.iaomessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326401909357-unq5imh9ghc738li4noksca9vpi9b551.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB1E98K9-K0WuL9S4f0wj2RzH4Uu12XCo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
