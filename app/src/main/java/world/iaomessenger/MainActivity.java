@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         
         // this line has been added from gitlab!!
+        // teammate changes
         Log.d(TAG, "onCreate: Started.");
 
         BottomNavigationViewEx bottomNavigationView = (BottomNavigationViewEx) findViewById(R.id.bottom_navigation_view);
