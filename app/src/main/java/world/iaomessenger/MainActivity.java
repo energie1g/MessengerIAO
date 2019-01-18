@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         // this line has been added from gitlab!!
         // More changes for you!
         // teammate changes
-        Log.d(TAG, "onCreate: STarted.");
+        Log.d(TAG, "onCreate: STARTED.");
 
         BottomNavigationViewEx bottomNavigationView = (BottomNavigationViewEx) findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.enableAnimation(false);
