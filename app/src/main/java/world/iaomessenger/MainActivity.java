@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // I changed it once more from the server
         // this line has been added from gitlab!!
+        // More changes for you!
         // teammate changes
         Log.d(TAG, "onCreate: Started.");
 
