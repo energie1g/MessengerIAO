@@ -2,8 +2,11 @@ package world.iaomessenger;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String rName, rLastName, rEmail, rPassword, rRepeatPassword;
     FirebaseAuth currAuth;
     ProgressDialog progressDialog;
+    CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerRepeatPassword = (EditText) findViewById(R.id.register_repeat_password);
         registerBtn = (Button) findViewById(R.id.register_btn);
         progressDialog = new ProgressDialog(this);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayoutRegister);
     }
 
     private void createANewAccount() {
@@ -93,11 +98,19 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()) {
-                        redirectUserToLoginActivity();
-                        Toast.makeText(RegisterActivity.this, "The account has been created successfully", Toast.LENGTH_LONG).show();
+                        redirectUserToMainActivity();
+                        Snackbar.make(coordinatorLayout, "The account has been created successfully", Snackbar.LENGTH_LONG).show();
                         progressDialog.dismiss();
                     } else {
-                        Toast.makeText(RegisterActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                        Snackbar snackbarLoginUnsuccessful = Snackbar.make(coordinatorLayout, task.getResult().toString(), Snackbar.LENGTH_LONG);
+                        snackbarLoginUnsuccessful.setAction("RETRY", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
+                        snackbarLoginUnsuccessful.setActionTextColor(Color.WHITE);
+                        snackbarLoginUnsuccessful.show();
                         progressDialog.dismiss();
                     }
                 }
@@ -108,5 +121,10 @@ public class RegisterActivity extends AppCompatActivity {
     private void redirectUserToLoginActivity() {
         Intent loginActivityIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(loginActivityIntent);
+    }
+
+    private void redirectUserToMainActivity() {
+        Intent mainActivityIntent = new Intent(RegisterActivity.this, MainActivity.class);
+        startActivity(mainActivityIntent);
     }
 }

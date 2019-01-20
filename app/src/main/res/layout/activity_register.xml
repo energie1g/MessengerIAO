@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
     android:background="@drawable/ic_app_background3"
+    android:id="@+id/coordinatorLayoutRegister"
     >
 
     <ScrollView
