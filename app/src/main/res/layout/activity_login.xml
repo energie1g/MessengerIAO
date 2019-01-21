@@ -112,7 +112,7 @@
                     android:drawableStart="@drawable/ic_email_icon"
                     android:drawablePadding="7dp"
                     android:imeOptions=""
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
                     android:padding="12dp"
                     android:textColor="@color/colorNavy" />
 

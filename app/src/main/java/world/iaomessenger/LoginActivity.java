@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if(mAuth != null) {
+        if(currentUser != null) {
             redirectUserToMainActivity();
         }
     }

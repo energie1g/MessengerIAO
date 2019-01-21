@@ -20,52 +20,24 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
 
+    private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
+    private ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-
         Log.d(TAG, "onCreate: STARTED.");
 
-        BottomNavigationViewEx bottomNavigationView = (BottomNavigationViewEx) findViewById(R.id.bottom_navigation_view);
-        bottomNavigationView.enableAnimation(false);
-        bottomNavigationView.enableItemShiftingMode(false);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(0);
-        menuItem.setChecked(true);
+        mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationViewEx.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.ic_chat:
-                        break;
-
-                    case R.id.ic_groups:
-                        Intent groupsActivityIntent = new Intent(MainActivity.this, GroupsActivity.class);
-                        startActivity(groupsActivityIntent);
-                        break;
-
-                    case R.id.ic_contacts:
-                        Intent contactsActivityIntent = new Intent(MainActivity.this, ContactsActivity.class);
-                        startActivity(contactsActivityIntent);
-                        break;
-
-                    case R.id.ic_settings:
-                        Intent settingsActivityIntent = new Intent(MainActivity.this, SettingsActivity.class);
-                        startActivity(settingsActivityIntent);
-                        break;
-                }
-
-
-                return false;
-            }
-        });
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        setupViewPager(mViewPager);
     }
-
 
     @Override
     protected void onStart() {
@@ -76,4 +48,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void setupViewPager(ViewPager viewPager){
+        SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ChatsFragment(), "Chats");
+        adapter.addFragment(new GroupsFragment(), "Groups");
+        adapter.addFragment(new ContactsFragment(), "Contacts");
+        viewPager.setAdapter(adapter);
+    }
+
+    public void setViewPager(int fragmentNumber){
+        mViewPager.setCurrentItem(fragmentNumber);
+    }
 }

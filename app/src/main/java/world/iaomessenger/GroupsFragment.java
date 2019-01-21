@@ -2,33 +2,39 @@ package world.iaomessenger;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-public class ContactsActivity extends AppCompatActivity {
+public class GroupsFragment extends Fragment {
 
-    private static final String TAG = "ContactsActivity";
-
+    private static final String TAG = "GroupsFragment";
     private FirebaseAuth user;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_groups, container, false);
+
         Log.d(TAG, "onCreate: Started.");
 
-        BottomNavigationViewEx bottomNavigationView = (BottomNavigationViewEx) findViewById(R.id.bottom_navigation_view);
+        BottomNavigationViewEx bottomNavigationView = (BottomNavigationViewEx) view.findViewById(R.id.bottom_navigation_view_groups);
         bottomNavigationView.enableAnimation(false);
         bottomNavigationView.enableItemShiftingMode(false);
         Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(2);
+        MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationViewEx.OnNavigationItemSelectedListener() {
@@ -36,27 +42,21 @@ public class ContactsActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.ic_chat:
-                        Intent mainActivityIntent = new Intent(ContactsActivity.this, MainActivity.class);
-                        startActivity(mainActivityIntent);
+                        ((MainActivity) getActivity()).setViewPager(0);
                         break;
 
                     case R.id.ic_groups:
-                        Intent groupsActivityIntent = new Intent(ContactsActivity.this, GroupsActivity.class);
-                        startActivity(groupsActivityIntent);
+                        ((MainActivity) getActivity()).setViewPager(1);
                         break;
 
                     case R.id.ic_contacts:
-                        break;
-
-                    case R.id.ic_settings:
-                        Intent settingsActivityIntent = new Intent(ContactsActivity.this, SettingsActivity.class);
-                        startActivity(settingsActivityIntent);
+                        ((MainActivity) getActivity()).setViewPager(2);
                         break;
                 }
-
-
                 return false;
             }
         });
+
+        return view;
     }
 }

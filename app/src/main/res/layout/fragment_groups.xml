@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id="@+id/drawer"
+    >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/topBar"
+                >
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/middle"
+                android:layout_below="@+id/topBar"
+                android:layout_above="@+id/bottomBar"
+                >
+
+                <TextView
+                    android:id="@+id/requests_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GROUPS ACTIVITY"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:textSize="30sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/bottomBar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true">
+
+                <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+                    android:id="@+id/bottom_navigation_view_groups"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/grey_border_top"
+                    app:menu="@menu/bottom_navigation_menu"
+                    app:itemTextColor="@color/bottom_nav_color"
+                    app:itemIconTint="@color/bottom_nav_color"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
