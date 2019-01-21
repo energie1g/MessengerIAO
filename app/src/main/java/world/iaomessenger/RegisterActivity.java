@@ -20,6 +20,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -29,7 +31,10 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText registerName, registerLastName, registerEmail, registerPassword, registerRepeatPassword;
     private Button registerBtn;
     private String rName, rLastName, rEmail, rPassword, rRepeatPassword;
-    FirebaseAuth currAuth;
+
+    private FirebaseAuth currAuth;
+    private DatabaseReference databaseReference;
+
     ProgressDialog progressDialog;
     CoordinatorLayout coordinatorLayout;
 
@@ -41,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: STARTED");
 
         currAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         getFieldByIds();
 
@@ -72,6 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createANewAccount() {
+
         rName = registerName.getText().toString();
         rLastName = registerLastName.getText().toString();
         rEmail = registerEmail.getText().toString();
@@ -98,10 +105,15 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()) {
+
+                        String currentUserID = currAuth.getUid();
+                        databaseReference.child("Users").child(currentUserID).setValue("");
                         redirectUserToMainActivity();
                         Snackbar.make(coordinatorLayout, "The account has been created successfully", Snackbar.LENGTH_LONG).show();
                         progressDialog.dismiss();
+
                     } else {
+
                         Snackbar snackbarLoginUnsuccessful = Snackbar.make(coordinatorLayout, task.getResult().toString(), Snackbar.LENGTH_LONG);
                         snackbarLoginUnsuccessful.setAction("RETRY", new View.OnClickListener() {
                             @Override
@@ -112,6 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
                         snackbarLoginUnsuccessful.setActionTextColor(Color.WHITE);
                         snackbarLoginUnsuccessful.show();
                         progressDialog.dismiss();
+
                     }
                 }
             });
@@ -125,6 +138,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void redirectUserToMainActivity() {
         Intent mainActivityIntent = new Intent(RegisterActivity.this, MainActivity.class);
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainActivityIntent);
+        finish();
     }
 }

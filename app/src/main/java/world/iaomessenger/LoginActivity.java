@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
 
 
     @Override
@@ -48,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
 
         getFieldByIds();
 
@@ -151,18 +149,11 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if(currentUser != null) {
-            redirectUserToMainActivity();
-        }
-    }
-
     private void redirectUserToMainActivity() {
         Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainActivityIntent);
+        finish();
     }
 
     private void redirectUserToRegisterActivity() {
