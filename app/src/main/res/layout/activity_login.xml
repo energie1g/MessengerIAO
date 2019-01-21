@@ -27,13 +27,14 @@
 
             <ImageView
                 android:id="@+id/app_logo"
-                android:layout_width="185dp"
-                android:layout_height="140dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_below="@+id/login_back_arrow"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
                 android:contentDescription="@string/app_logo_description"
-                android:src="@drawable/ic_logo2" />
+                android:src="@drawable/ic_logo2"
+                />
 
             <RelativeLayout
                 android:id="@+id/rel_app_name"
@@ -42,7 +43,9 @@
                 android:layout_below="@+id/app_logo"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="-150"
+                >
 
                 <TextView
                     android:id="@+id/app_name_1st_half"
@@ -71,7 +74,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rel_app_name"
+                android:layout_below="@+id/app_logo"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="80dp"
@@ -109,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:drawableStart="@drawable/ic_email_icon"
+                    android:drawableStart="@drawable/ic_password_icon"
                     android:drawablePadding="7dp"
                     android:imeOptions=""
                     android:inputType="textPassword"
